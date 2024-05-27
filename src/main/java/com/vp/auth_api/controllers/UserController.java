@@ -1,6 +1,7 @@
 package com.vp.auth_api.controllers;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,6 +31,7 @@ public class UserController {
         return ResponseEntity.ok(currentUser);
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN','SUPERADMIN')")
     @GetMapping("/all")
     public ResponseEntity<List<User>> allUsers() {
         List <User> users = userService.allUsers();

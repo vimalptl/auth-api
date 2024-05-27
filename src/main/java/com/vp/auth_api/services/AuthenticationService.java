@@ -1,6 +1,7 @@
 package com.vp.auth_api.services;
 
 import java.util.Optional;
+import java.util.Set;
 
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -46,9 +47,9 @@ public class AuthenticationService {
         User user = new User()
                 .setFullName(input.getFullName())
                 .setEmail(input.getEmail())
-                .setPassword(passwordEncoder.encode(input.getPassword()))
-                .setRole(optionalRole.get());
+                .setPassword(passwordEncoder.encode(input.getPassword()));
 
+        user.setRoles(Set.of(optionalRole.get()));
         return userRepository.save(user);
     }
 

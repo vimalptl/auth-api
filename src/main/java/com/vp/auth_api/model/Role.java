@@ -2,9 +2,13 @@ package com.vp.auth_api.model;
 import jakarta.persistence.*;
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+
+
 @Table(name = "roles")
 @Entity
 public class Role {
@@ -27,6 +31,9 @@ public class Role {
     @UpdateTimestamp
     @Column(name = "updated_at")
     private Date updatedAt;
+
+    // @ManyToMany(mappedBy = "roles",fetch = FetchType.LAZY)
+    // private Set<User> users = new HashSet<>();
 
     public Integer getId() {
         return id;
@@ -67,6 +74,4 @@ public class Role {
     public void setUpdatedAt(Date updatedAt) {
         this.updatedAt = updatedAt;
     }
-
-
 }
